@@ -1,4 +1,5 @@
 var http = require('http');
+var stream = require('stream');
 var server = http.createServer();
 var internalHandlers = [];
 server.on('request', function (req, res) {
@@ -41,14 +42,20 @@ get('/hi', function (req, res) {
 
 post('/', function (req, res) {
   var body = [];
-  var reqBody;
+
+  req.on('end', function () {
+    res.end();
+  })
+
   req
   .on('data', function (chunk) {
     body.push(chunk);
   })
   .on('end', function () {
-    reqBody = JSON.parse(Buffer.concat(body).toString());
-    console.log(reqBody);
+    if (req.headers['content-type'] === 'application/json') {
+      req.body = JSON.parse(Buffer.concat(body).toString());
+    }
+    console.log(req.body);
     res.end();
   });
 });
