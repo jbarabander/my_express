@@ -6,6 +6,18 @@ function Application () {
   this.server;
 }
 
+Application.prototype.get = function () {
+  this._router.get.apply(this._router, arguments);
+}
+
+Application.prototype.post = function () {
+  this._router.post.apply(this._router, arguments);
+}
+
+Application.prototype.use = function () {
+  this._router.use.apply(this._router, arguments);
+}
+
 Application.prototype.listen = function (port, cb) {
   var portToUse = typeof port === 'number' ? port : 3000;
   var self = this;
