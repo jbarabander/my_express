@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "speed-query": "^1.0.0"
+    "path-to-regexp": "^1.6.0",
+    "speed-query": "^1.0.1"
   }
 }

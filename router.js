@@ -49,7 +49,8 @@ Router.prototype.use = function (path, cb) {
     path: pathAndHandlerObj.path,
     handler: pathAndHandlerObj.handler,
     method: constants.USE
-  }
+  };
+  this.middleware.push(entryToRegister);
 }
 
 function pickPathAndHandler (path, cb, allowRouter) {
